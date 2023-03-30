@@ -19,7 +19,7 @@ export const MainContent = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4rem 15rem 0;
+  padding: 4rem 15rem 10rem;
   gap: 10rem;
 `;
 
@@ -57,9 +57,8 @@ export const Menu = styled.div`
 `;
 
 export const Footer = styled.footer`
-  position: absolute;
+  position: fixed;
   bottom: 0;
-
   width: 100%;
 `;
 
@@ -67,7 +66,7 @@ export const SearchInput = styled.div`
   display: flex;
   border-radius: 25px;
   background-color: ${({ theme }) => theme.gray300};
-  padding: 1.5rem;
+  padding: 1.5rem 2rem 1.5rem 2.5rem;
   width: 60%;
   box-shadow: rgba(34, 177, 76, 0.4) 0px 5px, rgba(34, 177, 76, 0.3) 0px 10px,
     rgba(34, 177, 76, 0.2) 0px 15px, rgba(34, 177, 76, 0.1) 0px 20px,

@@ -20,7 +20,6 @@ export const DefaultLayout: FC<DefaultLayoutProps> = ({children}) => {
                 <Image src={logoRickyMorty} alt="" width={120} height={120}/>
                 
                 <Menu>
-                    <Link href="/">Teste</Link>
                     <Link href="/">Home</Link>
                     <Link href="/favorites">Favoritos</Link>
                 </Menu>
