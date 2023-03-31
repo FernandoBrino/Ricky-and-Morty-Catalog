@@ -6,6 +6,6 @@ export const FavoritesContainer = styled.div`
   gap: 1rem;
 
   h1 > span {
-    color: ${({ theme }) => theme.yellow};
+    color: ${({ theme }) => theme.yellow700};
   }
 `;

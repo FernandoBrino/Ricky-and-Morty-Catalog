@@ -12,6 +12,10 @@ export const Header = styled.header`
   align-items: center;
   padding: 0 2.7rem 0 0;
   background-color: ${({ theme }) => theme.gray700};
+
+  > img {
+    cursor: pointer;
+  }
 `;
 
 export const MainContent = styled.main`
@@ -43,7 +47,7 @@ export const Menu = styled.div`
     left: 0;
     width: 100%;
     height: 0.1em;
-    background-color: ${({ theme }) => theme.green};
+    background-color: ${({ theme }) => theme.green300};
     opacity: 0;
     transition: opacity 300ms, transform 300ms;
     transform: scale(0);
@@ -60,23 +64,4 @@ export const Footer = styled.footer`
   position: fixed;
   bottom: 0;
   width: 100%;
-`;
-
-export const SearchInput = styled.div`
-  display: flex;
-  border-radius: 25px;
-  background-color: ${({ theme }) => theme.gray300};
-  padding: 1.5rem 2rem 1.5rem 2.5rem;
-  width: 60%;
-  box-shadow: rgba(34, 177, 76, 0.4) 0px 5px, rgba(34, 177, 76, 0.3) 0px 10px,
-    rgba(34, 177, 76, 0.2) 0px 15px, rgba(34, 177, 76, 0.1) 0px 20px,
-    rgba(34, 177, 76, 0.05) 0px 25px;
-
-  input {
-    border: none;
-    outline: none;
-    background-color: ${({ theme }) => theme.gray300};
-    flex: 1;
-    font-size: 2rem;
-  }
 `;

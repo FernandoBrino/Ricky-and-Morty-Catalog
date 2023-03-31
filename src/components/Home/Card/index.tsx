@@ -1,11 +1,10 @@
-import Michael from "@/assets/Michael.jpeg"
 import Image from "next/image"
 import { CardContainer, Description } from "./styles"
 import {BsStar} from "react-icons/bs"
 import { FC } from "react"
 import {useTheme} from "styled-components"
 
-interface CharacterProps {
+type CharacterType = {
     id: number;
     name: string;
     status: string;
@@ -19,19 +18,27 @@ interface CharacterProps {
     image: string;
 }
 interface CardProps {
-    character: CharacterProps;
+    character: CharacterType;
 }
 
 export const Card: FC<CardProps> = ({ character }) => {
-    const { yellow } = useTheme();
+    const { yellow700 } = useTheme();
 
     return (
-        <CardContainer href={`/character/${character.id}`}>
-            <BsStar className="favorite" size={24} color={yellow} />
+        <CardContainer href={`/character/${character.id}`} status={character.status}>
+            <BsStar className="favorite" size={24} color={yellow700} />
 
-            <Image loader={() => character.image} unoptimized src={character.image} width={250} height={200} alt="" />
+            <Image 
+                src={character.image} 
+                width={250} 
+                height={200} 
+                alt="" 
+                loader={() => character.image} 
+                unoptimized  
+                priority
+            />
 
-            <Description>
+            <Description status={character.status}>
                 <h1>{character.name}</h1>
 
                 <div className="status">

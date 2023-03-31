@@ -15,16 +15,23 @@ export const Pagination: FC<PaginationProps> = ({ totalCharacters, charactersPer
     let pages = [];
 
     for (let i = 1; i <= Math.ceil(totalCharacters/charactersPerPage); i++) {
-        pages.push(i);
+        const newPage = {
+            id: i * 10,
+            number: i
+        }
+        pages.push(newPage);
     }
+
+    pages = pages.slice(0, 9);
 
     return (
         <PaginationContainer>
             {
-                pages.map((page, index) => 
-                    <button key={index} onClick={() => handleChangeCurrentPage(page)} >{page}</button>
+                pages.map((page) => 
+                    <button key={page.id} onClick={() => handleChangeCurrentPage(page.number)} >{page.number}</button>
                 )
             }
+            <span>...</span>
         </PaginationContainer>
     )
 }
