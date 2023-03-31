@@ -19,7 +19,7 @@ export const SearchInput = styled.div`
   border-radius: 25px;
   background-color: ${({ theme }) => theme.gray300};
   padding: 1.5rem 2rem 1.5rem 2.5rem;
-  width: 80%;
+  width: 100rem;
   margin-bottom: 12rem;
   box-shadow: 0px 5px 10px 0px ${({theme}) => theme.greenAlpha300};
 

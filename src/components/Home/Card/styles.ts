@@ -5,11 +5,9 @@ interface CardProps {
   status: string;
 }
 
-export const CardContainer = styled(Link)<CardProps>`
-  text-decoration: none;
+export const CardContainer = styled.div<CardProps>`
   width: 250px;
   border-radius: 10px;
-  color: ${({ theme }) => theme.white};
   position: relative;
   box-shadow: 0px 5px 10px 0px ${({ status, theme }) => 
     status === 'Alive' ? theme.greenAlpha300 : 
@@ -18,6 +16,15 @@ export const CardContainer = styled(Link)<CardProps>`
   };
 
   transition: all ease 0.2s;
+
+  a {
+    color: ${({ theme }) => theme.white};
+    text-decoration: none;
+  }
+
+  svg {
+    cursor: pointer;
+  }
 
   img {
     display: flex;

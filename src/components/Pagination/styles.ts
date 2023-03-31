@@ -4,26 +4,42 @@ export const PaginationContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.7rem;
-    margin-top: 3rem;
-    border: none;
+    gap: 1rem;
 
-    button {
+    li {
+      width: 3.2rem;
+      height: 3.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    
+
+      button,
+      span {
+        width: 3.5rem;
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: ${({theme}) => theme.white};
+        border-radius: 6px;
+        font-weight: bold;
+      }
+
+      button {
         cursor: pointer;
         padding: 0.7rem 1rem;
         border-radius: 6px;
         border: 2px solid transparent;
-        transition: all 0.2s linear;
-    }
+        transition: background-color 0.2s, border-color 0.2s linear;
+        font-weight: bold;
 
-    button:hover {
-        border: 2px solid ${({theme}) => theme.green300};
-    }
+        font-size: 1rem;
+        color: ${({theme}) => theme.gray700};
 
-    span {
-        padding: 0.7rem 1rem;
-        border-radius: 6px;
-        border: 2px solid transparent;
-        background-color: ${({theme}) => theme.white}
+        &:hover {
+            border: 2px solid ${({theme}) => theme.green300}
+        }
+      }
     }
 `

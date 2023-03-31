@@ -2,11 +2,39 @@ import styled from "styled-components";
 
 interface CardProps {
     status: string;
-  }
+}
 
 export const CharacterContainer = styled.div`
-    font-size: 4.6rem;
-    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 18rem;
+    margin-top: 5rem;
+`
+
+export const Connector = styled.div<CardProps>`
+    --bg-border: ${({ status, theme }) =>
+        status === 'Alive' ? theme.green300 : 
+        status === 'Dead' ? theme.red300 :
+        theme.white
+      };
+
+    width: 100%;
+    background-color: var(--bg-border);
+    height: 0.2rem;
+    position: relative;
+    top: 23rem;
+    left: 15.5rem;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: -0.4rem;
+        right: -1.3rem;
+        width: 1rem;
+        height: 1rem;
+        background-color: var(--bg-border);
+        border-radius: 20px; 
+    }
 `
 
 export const CharacterImage = styled.div<CardProps>`
@@ -32,7 +60,7 @@ export const CharacterImage = styled.div<CardProps>`
         status === 'Alive' ? theme.green300 : 
         status === 'Dead' ? theme.red300 :
         theme.white
-      };
+    };
     
     &::before {
         content: '';
@@ -58,6 +86,74 @@ export const CharacterImage = styled.div<CardProps>`
         z-index: 1;
         top: 0.3rem;
         left: 0.3rem;
+    }
+`
+
+export const CharacterDescription = styled.div<CardProps>`
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    color: ${({theme}) => theme.white};
+    background-color: ${({ theme }) => theme.gray700};
+    box-shadow: 0px 5px 10px 0px ${({ status, theme }) => 
+        status === 'Alive' ? theme.greenAlpha300 : 
+        status === 'Dead' ? theme.redAlpha700 :
+        theme.whiteAlpha700
+    };
+
+    padding: 2rem;
+    border-radius: 20px;
+    min-width: 80%;
+    max-height: 40rem;
+
+    position: relative;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        box-shadow: inset 0 0 6px ${({theme}) => theme.white};
+        background-color: ${({theme}) => theme.white};
+        border: 1px solid ${({theme}) => theme.white};
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    a {
+        text-decoration: none;
+        color: ${({ theme }) => theme.white};
+        transition: color .2s linear;
+    }
+
+    a:hover {
+        color: ${({ theme }) => theme.yellow700};
+    }
+
+    .titleCharacter {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .subtitle {
+        color: ${({ theme }) => theme["subtitle-color"]};
+        font-size: 1rem;
+    }
+
+    .favorite {
+        position: absolute;
+        right: 2.5rem;
+        top: 2rem;
+
+        cursor: pointer;
     }
 `
 

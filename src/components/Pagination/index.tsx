@@ -5,33 +5,98 @@ interface PaginationProps {
     totalCharacters: number | undefined;
     charactersPerPage: number
     handleChangeCurrentPage: (page: number) => void;
+    currentPage: number
 }
 
-export const Pagination: FC<PaginationProps> = ({ totalCharacters, charactersPerPage, handleChangeCurrentPage }) => {
-    if(totalCharacters == undefined) {
-        totalCharacters = 0;
+const siblingsCount = 2
+
+function generatePagesArray(from: number, to: number) {
+    return [...new Array(to - from)].map((_, index) => from + index + 1)
+}
+
+export const Pagination: FC<PaginationProps> = ({ totalCharacters, charactersPerPage, currentPage, handleChangeCurrentPage }) => {
+    if(totalCharacters === undefined) {
+        totalCharacters = 826;
     }
 
-    let pages = [];
+    const lastPage = Math.floor(totalCharacters / charactersPerPage)
 
-    for (let i = 1; i <= Math.ceil(totalCharacters/charactersPerPage); i++) {
-        const newPage = {
-            id: i * 10,
-            number: i
-        }
-        pages.push(newPage);
-    }
+    const previousPages =
+    currentPage > 1
+      ? generatePagesArray(currentPage - 1 - siblingsCount, currentPage - 1)
+      : []
 
-    pages = pages.slice(0, 9);
+      const nextPages =
+        currentPage < lastPage
+        ? generatePagesArray(
+            currentPage,
+            Math.min(currentPage + siblingsCount, lastPage),
+            )
+        : []
+  
 
     return (
         <PaginationContainer>
-            {
-                pages.map((page) => 
-                    <button key={page.id} onClick={() => handleChangeCurrentPage(page.number)} >{page.number}</button>
-                )
-            }
-            <span>...</span>
-        </PaginationContainer>
+            {currentPage > siblingsCount + 1 && (
+            <>
+                <li>
+                <button type="button" onClick={() => handleChangeCurrentPage(1)}>
+                    1
+                </button>
+                </li>
+
+                {currentPage > 2 + siblingsCount && (
+                <li>
+                    <span>...</span>
+                </li>
+                )}
+            </>
+            )}
+
+            {previousPages.length
+            ? previousPages.map((page) => (
+                <li key={page}>
+                    <button type="button" onClick={() => handleChangeCurrentPage(page)}>
+                    {page}
+                    </button>
+                </li>
+                ))
+            : ''}
+
+            <li>
+            <button
+                type="button"
+                onClick={() => handleChangeCurrentPage(currentPage)}
+            >
+                {currentPage}
+            </button>
+            </li>
+
+            {nextPages.length
+            ? nextPages.map((page) => (
+                <li key={page}>
+                    <button type="button" onClick={() => handleChangeCurrentPage(page)}>
+                    {page}
+                    </button>
+                </li>
+                ))
+            : ''}
+
+            {currentPage + siblingsCount < lastPage && (
+            <>
+                {currentPage + 1 + siblingsCount < lastPage && (
+                    <li>
+                        <span>...</span>
+                    </li>
+                    )}
+
+                    <li>
+                    <button type="button" onClick={() => handleChangeCurrentPage(lastPage)}>
+                        {lastPage}
+                    </button>
+                </li>
+            </>
+            )}
+        </PaginationContainer> 
     )
 }

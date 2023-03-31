@@ -30,7 +30,7 @@ export const DefaultLayout: FC<DefaultLayoutProps> = ({children}) => {
                 
                 <Menu>
                     <Link href="/">Home</Link>
-                    <Link href="/favorites">Favoritos</Link>
+                    <Link href="/favorites">Favorites</Link>
                 </Menu>
             </Header>
 
