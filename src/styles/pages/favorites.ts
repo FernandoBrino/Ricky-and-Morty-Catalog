@@ -32,3 +32,40 @@ export const SearchInput = styled.div`
   }
 `;
 
+export const FavoritesNotExist = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5rem;
+
+  h1 {
+    color: ${({ theme }) => theme.white}
+  }
+
+  img {
+    width: 40.5rem;
+    height: 40.5rem;
+    
+    border-radius: 20.1rem;
+    border: 3px solid ${({ theme }) => theme.whiteAlpha700};
+  }
+  
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    border: 2px solid ${({theme}) => theme.white};
+    transition: background-color 0.2s, border-color 0.2s linear;
+    font-weight: bold;
+    background-color: ${({theme}) => theme.gray700};
+
+    font-size: 2rem;
+    color: ${({theme}) => theme.white};
+
+    &:hover {
+        border: 2px solid ${({theme}) => theme.green300}
+    }
+  }
+`
+

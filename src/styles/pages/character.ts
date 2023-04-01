@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-interface CardProps {
+interface IProps {
     status: string;
 }
 
@@ -11,7 +11,7 @@ export const CharacterContainer = styled.div`
     margin-top: 5rem;
 `
 
-export const Connector = styled.div<CardProps>`
+export const Connector = styled.div<IProps>`
     --bg-border: ${({ status, theme }) =>
         status === 'Alive' ? theme.green300 : 
         status === 'Dead' ? theme.red300 :
@@ -37,7 +37,7 @@ export const Connector = styled.div<CardProps>`
     }
 `
 
-export const CharacterImage = styled.div<CardProps>`
+export const CharacterImage = styled.div<IProps>`
     position: relative;
     top: 5rem;
     left: -25rem;
@@ -89,7 +89,7 @@ export const CharacterImage = styled.div<CardProps>`
     }
 `
 
-export const CharacterDescription = styled.div<CardProps>`
+export const CharacterDescription = styled.div<IProps>`
     display: flex;
     flex-direction: column;
     gap: 2rem;

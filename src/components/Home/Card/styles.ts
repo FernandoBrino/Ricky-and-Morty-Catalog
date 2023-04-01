@@ -1,11 +1,10 @@
-import Link from "next/link";
 import styled from "styled-components";
 
-interface CardProps {
+interface IProps {
   status: string;
 }
 
-export const CardContainer = styled.div<CardProps>`
+export const CardContainer = styled.div<IProps>`
   width: 250px;
   border-radius: 10px;
   position: relative;
@@ -45,7 +44,7 @@ export const CardContainer = styled.div<CardProps>`
   }
 `;
 
-export const Description = styled.div<CardProps>`
+export const Description = styled.div<IProps>`
   display: flex;
   flex-direction: column;
   gap: 0.9rem;

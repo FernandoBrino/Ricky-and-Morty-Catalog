@@ -30,12 +30,13 @@ export const PaginationContainer = styled.div`
         cursor: pointer;
         padding: 0.7rem 1rem;
         border-radius: 6px;
-        border: 2px solid transparent;
+        border: 2px solid ${({theme}) => theme.white};
         transition: background-color 0.2s, border-color 0.2s linear;
         font-weight: bold;
+        background-color: ${({theme}) => theme.gray700};
 
         font-size: 1rem;
-        color: ${({theme}) => theme.gray700};
+        color: ${({theme}) => theme.white};
 
         &:hover {
             border: 2px solid ${({theme}) => theme.green300}

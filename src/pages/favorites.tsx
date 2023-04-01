@@ -3,13 +3,28 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useQuery } from "react-query";
-import { api } from "@/lib/axios";
-import { CardsContainer, FavoritesContainer, SearchInput } from "@/styles/pages/favorites";
+import { CardsContainer, FavoritesContainer, FavoritesNotExist, SearchInput } from "@/styles/pages/favorites";
 import { Pagination } from "@/components/Pagination";
 import { BiSearchAlt } from "react-icons/bi";
 import { Card } from "@/components/Home/Card";
 import { useAppSelector } from "@/hooks/selector";
+import rickBebendo from "@/assets/rickBebendo.jpg"
+import Image from "next/image";
+import Link from "next/link";
+
+type CharacterType = {
+  id: number;
+  name: string;
+  status: string;
+  species: string;
+  origin: {
+    name: string;
+  };
+  location: {
+    name: string;
+  };
+  image: string;
+}
 
 const searchCharacter = z.object({
   query: z.string(),
@@ -27,15 +42,22 @@ export default function Favorites() {
     }
   });
   const favoritesList = useAppSelector(state => state.favorites.favorites);
-  
+  const [filteredFavoriteList, setFilteredFavoriteList] = useState<CharacterType[]>([]);
+
   const charactersPerPage = 20;
   const totalCharacters = favoritesList.length
 
-  const userSearch = watch("query");
+  const userSearch = watch("query").charAt(0).toUpperCase();
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [currentPage])
+
+  useEffect(() => {
+    const newFilteredList = favoritesList.filter(character => character.name.includes(userSearch))
+
+    setFilteredFavoriteList(newFilteredList)
+  }, [userSearch, favoritesList])
 
   function handleChangeCurrentPage(page: number) {
     setCurrentPage(page);
@@ -43,26 +65,50 @@ export default function Favorites() {
 
   return (
     <FavoritesContainer>
-      <SearchInput>
+      {favoritesList.length > 0 ? 
+      <>
+        <SearchInput>
           <input type="text" {...register("query")} placeholder="Enter character's name"/>
           <BiSearchAlt size={24} color={green300} />
-      </SearchInput>
+        </SearchInput>
 
-      <CardsContainer>
-        {
-          favoritesList.map(character =>
-            <Card character={character} key={character.id} /> 
-          )
-        }
-      </CardsContainer>
+        <CardsContainer>
+          {filteredFavoriteList ? 
+            filteredFavoriteList.map(character =>
+              <Card character={character} key={character.id} /> 
+            ) : 
+            favoritesList.map(character =>
+              <Card character={character} key={character.id} /> 
+            )
+          }
+        </CardsContainer>
+        
+        
+        <Pagination 
+          totalCharacters={totalCharacters} 
+          charactersPerPage={charactersPerPage} 
+          currentPage={currentPage}
+          handleChangeCurrentPage={handleChangeCurrentPage}
+        />
+      </>
+        : 
+        <FavoritesNotExist>
+            <h1>Sem favoritos por aqui 😔</h1>
+
+            <Image 
+              src={rickBebendo}
+              width={400} 
+              height={400} 
+              alt="" 
+              priority
+            />
+
+            <Link href="/">
+              Back to Home
+            </Link>
+        </FavoritesNotExist>
+    }
       
-      
-      <Pagination 
-        totalCharacters={totalCharacters} 
-        charactersPerPage={charactersPerPage} 
-        currentPage={currentPage}
-        handleChangeCurrentPage={handleChangeCurrentPage}
-      />
       
     </FavoritesContainer>
   )
