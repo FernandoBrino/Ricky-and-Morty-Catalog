@@ -43,4 +43,8 @@ export const PaginationContainer = styled.div`
         }
       }
     }
+
+    .isActive {
+      border: 2px solid ${({theme}) => theme.green300}
+    }
 `

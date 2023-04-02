@@ -43,11 +43,12 @@ export default function Favorites() {
   });
   const favoritesList = useAppSelector(state => state.favorites.favorites);
   const [filteredFavoriteList, setFilteredFavoriteList] = useState<CharacterType[]>([]);
+  //Parar de usar estados derivados
 
   const charactersPerPage = 20;
   const totalCharacters = favoritesList.length
 
-  const userSearch = watch("query").charAt(0).toUpperCase();
+  const userSearch = watch("query") ? watch("query").split(" ").map((word) => word[0]?.toUpperCase() + word.substring(1).split("").map((letter) => letter.toLowerCase()).join("")).join(" ") : "";
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
@@ -77,12 +78,11 @@ export default function Favorites() {
             filteredFavoriteList.map(character =>
               <Card character={character} key={character.id} /> 
             ) : 
-            favoritesList.map(character =>
+            favoritesList.slice(0, 20).map(character =>
               <Card character={character} key={character.id} /> 
             )
           }
         </CardsContainer>
-        
         
         <Pagination 
           totalCharacters={totalCharacters} 

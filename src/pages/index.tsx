@@ -11,7 +11,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { BsFilter } from "react-icons/bs";
 import { DropdownFilter } from "@/components/Home/DropdownFilter";
-interface CharactersApi {
+import Head from "next/head";
+
+type CharactersApi = {
   info: {
     count: number;
   }
@@ -32,6 +34,15 @@ type CharacterType =  {
   image: string;
 }
 
+type StatusTypes = "Alive" | "Dead" | "Unknown" | ""
+
+type GenderTypes = "Male" | "Female" | "Genderless" | "Unknown" | ""
+
+type FiltersType = {
+    status: StatusTypes;
+    gender: GenderTypes
+}
+
 const searchCharacter = z.object({
   query: z.string(),
 })
@@ -41,6 +52,7 @@ type SearchCharacterData = z.infer<typeof searchCharacter>
 export default function Home() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [dropdownIsActive, setDropdownIsActive] = useState<boolean>(false);
+  const [filtersList, setFiltersList] = useState<FiltersType>({} as FiltersType);
 
   const {green300} = useTheme();
 
@@ -57,8 +69,8 @@ export default function Home() {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [currentPage])
 
-  const characters = useQuery(["characters", currentPage, userSearch], () => {
-    return api.get<CharactersApi>(`character?page=${currentPage}&name=${userSearch}`,).then(response => response.data)
+  const characters = useQuery(["characters", currentPage, userSearch, filtersList], () => {
+    return api.get<CharactersApi>(`character?page=${currentPage}&${userSearch && `name=${userSearch}&`}${filtersList.status && `status=${filtersList.status}&`}${filtersList.gender && `gender=${filtersList.gender}&`}`,).then(response => response.data)
   })
 
   function handleChangeCurrentPage(page: number) {
@@ -69,42 +81,53 @@ export default function Home() {
     setDropdownIsActive(!dropdownIsActive)
   }
 
+  function handleSetCharactersFilter(filters: FiltersType) {
+    setFiltersList(filters);
+  }
+
   const charactersPerPage = 20;
   const totalCharacters = characters.data?.info.count
 
   return (
-    <HomeContainer>
-      <div className="searchFilters">
-        <SearchInput>
-          <input type="text" {...register("query")} placeholder="Enter character's name"/>
-          <BiSearchAlt size={24} color={green300}/>
-        </SearchInput>
-
-        <FilterButton isActive={dropdownIsActive}>
-          <button onClick={handleOpenDropdownFilter}>
-            <BsFilter size={18}/>
-          </button>
-
-          <DropdownFilter isActive={dropdownIsActive}/>
-        </FilterButton>
-      </div>
+    <>
+      <Head>
+        <title>Home</title>
+      </Head>
     
-      <CardsContainer>
-        {
-          !characters.isLoading && characters.data?.results.map(character =>
-            <Card character={character} key={character.id} /> 
-          )
-        }
-      </CardsContainer>
+
+      <HomeContainer>
+        <div className="searchFilters">
+          <SearchInput>
+            <input type="text" {...register("query")} placeholder="Enter character's name"/>
+            <BiSearchAlt size={24} color={green300}/>
+          </SearchInput>
+
+          <FilterButton isActive={dropdownIsActive}>
+            <button onClick={handleOpenDropdownFilter}>
+              <BsFilter size={18}/>
+            </button>
+
+            <DropdownFilter isActive={dropdownIsActive} handleSetCharactersFilter={handleSetCharactersFilter}/>
+          </FilterButton>
+        </div>
       
-      
-      <Pagination 
-        totalCharacters={totalCharacters} 
-        charactersPerPage={charactersPerPage} 
-        currentPage={currentPage}
-        handleChangeCurrentPage={handleChangeCurrentPage}
-      />
-      
-    </HomeContainer>
+        <CardsContainer>
+          {
+            !characters.isLoading && characters.data?.results.map(character =>
+              <Card character={character} key={character.id} /> 
+            )
+          }
+        </CardsContainer>
+        
+        
+        <Pagination 
+          totalCharacters={totalCharacters} 
+          charactersPerPage={charactersPerPage} 
+          currentPage={currentPage}
+          handleChangeCurrentPage={handleChangeCurrentPage}
+        />
+        
+      </HomeContainer>
+    </>
   )
 }

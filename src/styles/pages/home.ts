@@ -27,7 +27,7 @@ export const CardsContainer = styled.div`
 export const FilterButton = styled.div<IProps>`
   position: relative;
 
-  button {
+  > button {
     cursor: pointer;
     text-decoration: none;
     padding: 0.7rem 1rem;
@@ -36,7 +36,6 @@ export const FilterButton = styled.div<IProps>`
     transition: background-color 0.2s, border-color 0.2s linear;
     font-weight: bold;
     background-color: ${({theme}) => theme.gray700};
-    position: relative;
     margin-top: 0.6rem;
 
     color: ${({theme}) => theme.white};

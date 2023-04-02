@@ -8,7 +8,7 @@ interface PaginationProps {
     currentPage: number
 }
 
-const siblingsCount = 2
+const siblingsCount = 1
 
 function generatePagesArray(from: number, to: number) {
     return [...new Array(to - from)].map((_, index) => from + index + 1)
@@ -16,7 +16,7 @@ function generatePagesArray(from: number, to: number) {
 
 export const Pagination: FC<PaginationProps> = ({ totalCharacters, charactersPerPage, currentPage, handleChangeCurrentPage }) => {
     if(totalCharacters === undefined) {
-        totalCharacters = 826;
+        return null;
     }
 
     const lastPage = Math.floor(totalCharacters / charactersPerPage)
@@ -67,6 +67,7 @@ export const Pagination: FC<PaginationProps> = ({ totalCharacters, charactersPer
             <button
                 type="button"
                 onClick={() => handleChangeCurrentPage(currentPage)}
+                className="isActive"
             >
                 {currentPage}
             </button>

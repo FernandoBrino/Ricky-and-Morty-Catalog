@@ -1,0 +1,1 @@
+export const statusList = ["Alive", "Dead", "Unknown"]

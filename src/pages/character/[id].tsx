@@ -9,6 +9,7 @@ import { FaGenderless } from "react-icons/fa";
 import { useTheme } from "styled-components";
 import { useDispatch } from "react-redux"
 import { disfavorCard, favoriteCard } from "@/features/favorites/favorites.slice";
+import Head from "next/head";
 
 interface CharacterProps {
     character: CharacterType
@@ -82,59 +83,66 @@ export default function Character({ character }: CharacterProps) {
     }
 
     return (
-        <CharacterContainer>
-            <div>
-                <Connector status={character.status}></Connector>
+        <>
+            <Head>
+                <title>{character.name}</title>
+            </Head>
+        
 
-                <CharacterImage status={character.status}>
-                    <Image 
-                        src={character.image} 
-                        width={400} 
-                        height={400} 
-                        alt="" 
-                        loader={() => character.image} 
-                        unoptimized 
-                        priority
+            <CharacterContainer>
+                <div>
+                    <Connector status={character.status}></Connector>
+
+                    <CharacterImage status={character.status}>
+                        <Image 
+                            src={character.image} 
+                            width={400} 
+                            height={400} 
+                            alt="" 
+                            loader={() => character.image} 
+                            unoptimized 
+                            priority
+                        />
+                    </CharacterImage>
+                </div>
+                
+
+                <CharacterDescription status={character.status}>
+                    <BsStarFill 
+                        className="favorite" 
+                        size={24} 
+                        onClick={handleFavoriteCard}
+                        color={isFavorited ? yellow700 : "white"}
                     />
-                </CharacterImage>
-            </div>
-            
 
-            <CharacterDescription status={character.status}>
-                <BsStarFill 
-                    className="favorite" 
-                    size={24} 
-                    onClick={handleFavoriteCard}
-                    color={isFavorited ? yellow700 : "white"}
-                />
+                    <div>
+                        <span className="titleCharacter">
+                            <h1>{character.name}</h1>
+                            {generateIconGender(character.gender)}
+                        </span>
+                        
+                        <p>{character.species} - {character.type === '' ? 'Type Not Specified' : character.type}</p>
+                    </div>
 
-                <div>
-                    <span className="titleCharacter">
-                        <h1>{character.name}</h1>
-                        {generateIconGender(character.gender)}
-                    </span>
-                    
-                    <p>{character.species} - {character.type === '' ? 'Type Not Specified' : character.type}</p>
-                </div>
+                    <div>
+                        <span className="subtitle">Last known location:</span>
+                        <p>{character.location.name}</p>
+                    </div>
 
-                <div>
-                    <span className="subtitle">Last known location:</span>
-                    <p>{character.location.name}</p>
-                </div>
+                    <div>
+                        <span className="subtitle">First seen in:</span>
+                        <p>{character.origin.name}</p>
+                    </div>
 
-                <div>
-                    <span className="subtitle">First seen in:</span>
-                    <p>{character.origin.name}</p>
-                </div>
-
-                <div>
-                    <span className="subtitle">Episodes:</span>
-                    {character.episode.map(episode =>
-                        <a href={episode} key={episode}>{episode}</a>
-                    )}
-                </div>
-            </CharacterDescription>
-        </CharacterContainer>
+                    <div>
+                        <span className="subtitle">Episodes:</span>
+                        {character.episode.map(episode =>
+                            <a href={episode} key={episode}>{episode}</a>
+                        )}
+                    </div>
+                </CharacterDescription>
+            </CharacterContainer>
+        </>
     )
 }
 
