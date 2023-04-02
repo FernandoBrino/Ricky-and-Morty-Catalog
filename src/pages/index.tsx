@@ -12,6 +12,8 @@ import * as z from "zod";
 import { BsFilter } from "react-icons/bs";
 import { DropdownFilter } from "@/components/Home/DropdownFilter";
 import Head from "next/head";
+import { CardSkeleton } from "@/components/Home/Card/CardSkeleton";
+import { useCharacters } from "@/hooks/useCharacters";
 
 type CharactersApi = {
   info: {
@@ -40,7 +42,7 @@ type GenderTypes = "Male" | "Female" | "Genderless" | "Unknown" | ""
 
 type FiltersType = {
     status: StatusTypes;
-    gender: GenderTypes
+    gender: GenderTypes;
 }
 
 const searchCharacter = z.object({
@@ -65,13 +67,11 @@ export default function Home() {
 
   const userSearch = watch("query");
 
+  const { data, isLoading } = useCharacters({currentPage, userSearch, filtersList});
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [currentPage])
-
-  const characters = useQuery(["characters", currentPage, userSearch, filtersList], () => {
-    return api.get<CharactersApi>(`character?page=${currentPage}&${userSearch && `name=${userSearch}&`}${filtersList.status && `status=${filtersList.status}&`}${filtersList.gender && `gender=${filtersList.gender}&`}`,).then(response => response.data)
-  })
 
   function handleChangeCurrentPage(page: number) {
     setCurrentPage(page);
@@ -86,7 +86,7 @@ export default function Home() {
   }
 
   const charactersPerPage = 20;
-  const totalCharacters = characters.data?.info.count
+  const totalCharacters = data?.info.count
 
   return (
     <>
@@ -112,10 +112,11 @@ export default function Home() {
         </div>
       
         <CardsContainer>
-          {
-            !characters.isLoading && characters.data?.results.map(character =>
+          {!isLoading ? 
+            data?.results.map(character =>
               <Card character={character} key={character.id} /> 
-            )
+            ) :
+            [...Array(20)].map((item) => <CardSkeleton key={item}/>)
           }
         </CardsContainer>
         

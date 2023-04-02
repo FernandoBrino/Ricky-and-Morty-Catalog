@@ -12,6 +12,14 @@ export const CardsContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 7rem;
   margin-bottom: 5rem;
+
+  @media(max-width: 1260px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media(max-width: 633px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `
 
 export const SearchInput = styled.div`

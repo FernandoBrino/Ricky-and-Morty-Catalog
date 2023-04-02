@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/hooks/selector";
+import { useAppSelector } from "@/hooks/useAppSelector";
 import { api } from "@/lib/axios"
 import { CharacterContainer, CharacterDescription, CharacterImage, Connector } from "@/styles/pages/character";
 import { GetStaticProps } from "next"

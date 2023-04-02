@@ -5,8 +5,9 @@ import { FC } from "react"
 import {useTheme} from "styled-components"
 import { useDispatch } from "react-redux"
 import { disfavorCard, favoriteCard } from "@/features/favorites/favorites.slice"
-import { useAppSelector } from "@/hooks/selector"
+import { useAppSelector } from "@/hooks/useAppSelector"
 import Link from "next/link"
+import { CardSkeleton } from "./CardSkeleton"
 
 type CharacterType = {
     id: number;
@@ -48,7 +49,7 @@ export const Card: FC<CardProps> = ({ character }) => {
         } else {
             dispatch(favoriteCard(character))
         }
-    }
+    } 
 
     return (
         <CardContainer status={character.status}>

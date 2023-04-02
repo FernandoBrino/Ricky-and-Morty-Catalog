@@ -9,6 +9,10 @@ export const CharacterContainer = styled.div`
     align-items: center;
     gap: 18rem;
     margin-top: 5rem;
+
+    @media(max-width: 1280px) {
+        flex-direction: column;
+    }
 `
 
 export const Connector = styled.div<IProps>`
@@ -34,6 +38,16 @@ export const Connector = styled.div<IProps>`
         height: 1rem;
         background-color: var(--bg-border);
         border-radius: 20px; 
+    }
+
+    @media(max-width: 1366px) {
+        top: 20rem;
+    }
+
+    @media(max-width: 1280px) {
+        left: 0;
+        top: 31rem;
+        transform: rotate(90deg);
     }
 `
 
@@ -86,6 +100,26 @@ export const CharacterImage = styled.div<IProps>`
         z-index: 1;
         top: 0.3rem;
         left: 0.3rem;
+    }
+
+    @media(max-width: 1760px) {
+        top: 5rem;
+        left: -15rem;
+    }
+
+    @media(max-width: 1366px) {
+        width: 30.5rem;
+        height: 30.5rem;
+
+        img {
+            width: 30rem;
+            height: 30rem;
+        }
+    }
+
+    @media(max-width: 1280px) {
+        top: 0;
+        left: 0;
     }
 `
 
@@ -154,6 +188,10 @@ export const CharacterDescription = styled.div<IProps>`
         top: 2rem;
 
         cursor: pointer;
+    }
+
+    @media(max-width: 1760px) {
+        min-width: 60%;
     }
 `
 

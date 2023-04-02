@@ -7,7 +7,7 @@ import { CardsContainer, FavoritesContainer, FavoritesNotExist, SearchInput } fr
 import { Pagination } from "@/components/Pagination";
 import { BiSearchAlt } from "react-icons/bi";
 import { Card } from "@/components/Home/Card";
-import { useAppSelector } from "@/hooks/selector";
+import { useAppSelector } from "@/hooks/useAppSelector";
 import rickBebendo from "@/assets/rickBebendo.jpg"
 import Image from "next/image";
 import Link from "next/link";
@@ -43,7 +43,6 @@ export default function Favorites() {
   });
   const favoritesList = useAppSelector(state => state.favorites.favorites);
   const [filteredFavoriteList, setFilteredFavoriteList] = useState<CharacterType[]>([]);
-  //Parar de usar estados derivados
 
   const charactersPerPage = 20;
   const totalCharacters = favoritesList.length
