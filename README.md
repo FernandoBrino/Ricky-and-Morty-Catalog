@@ -1,5 +1,7 @@
 # Ricky and Morty Catalog 🥒
 
+![image](https://user-images.githubusercontent.com/72673527/229385268-113ba927-5c37-448b-b34c-1d7621b43420.png)
+
 ## 📖 Sobre
 
 Trata-se de um catálogo de personagens do desenho Ricky and Morty desenvolvido em Next.js e TypeScript, utilizando dados da [The Ricky and Morty API](https://rickandmortyapi.com). Para estilização foi escolhida a abordagem com Styled-components. Foi utilizado a biblioteca React Query para cache local dos dados da API e gerenciamento assíncrono de estados. Para padronização do código foi utilizado ESLint e Prettier.
