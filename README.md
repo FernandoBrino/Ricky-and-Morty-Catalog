@@ -1,4 +1,4 @@
-# Ricky and Morty Catalog
+# Ricky and Morty Catalog 🥒
 
 ## 📖 Sobre
 
