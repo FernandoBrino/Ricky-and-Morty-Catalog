@@ -14,8 +14,9 @@ O projeto pode ser visualizado clicando [aqui](https://desafio-green-acesso.verc
 - **React Query** para gerenciamento de estado assíncrono
 - **React Icons** como biblioteca de ícones
 - **React Loading Skeleton** para animação do tipo skeleton
-- **React Redux** para gerenciamento de estados da aplicação.
 - **React Hook Form / zod** para validação e gerenciamento de formulários. 
+- **React Redux** para gerenciamento de estados da aplicação.
+- **Redux Persist** para salvar os dados da "store" em local storage.
 - **Styled-components** para estilização da aplicação
 - **NextJs** para a construção de uma interface com performance e escalabilidade.
 
