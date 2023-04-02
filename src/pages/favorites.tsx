@@ -45,7 +45,7 @@ export default function Favorites() {
   const [filteredFavoriteList, setFilteredFavoriteList] = useState<CharacterType[]>([]);
 
   const charactersPerPage = 20;
-  const totalCharacters = favoritesList.length
+  const totalCharacters = favoritesList.length;
 
   const userSearch = watch("query") ? watch("query").split(" ").map((word) => word[0]?.toUpperCase() + word.substring(1).split("").map((letter) => letter.toLowerCase()).join("")).join(" ") : "";
 

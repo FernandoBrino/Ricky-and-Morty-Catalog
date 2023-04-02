@@ -18,6 +18,7 @@ interface FavoritesState {
     favorites: CharacterType[]
 }
 
+
 const initialState: FavoritesState = {
     favorites: []
 }

@@ -116,7 +116,7 @@ export default function Home() {
             data?.results.map(character =>
               <Card character={character} key={character.id} /> 
             ) :
-            [...Array(20)].map((item) => <CardSkeleton key={item}/>)
+            [...Array(20)].map((item, index) => <CardSkeleton key={index}/>)
           }
         </CardsContainer>
         
