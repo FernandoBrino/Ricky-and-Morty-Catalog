@@ -33,7 +33,7 @@ git clone https://github.com/FernandoBrino/desafio_green_acesso.git
 cd desafio_green_acesso
 
 # Baixe as dependências
-yarn add
+yarn
 
 # Execute o projeto
 yarn dev
