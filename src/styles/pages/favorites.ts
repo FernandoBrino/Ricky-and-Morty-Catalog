@@ -5,6 +5,7 @@ export const FavoritesContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 `;
 
 export const CardsContainer = styled.div`
@@ -27,7 +28,7 @@ export const SearchInput = styled.div`
   border-radius: 25px;
   background-color: ${({ theme }) => theme.gray300};
   padding: 1.5rem 2rem 1.5rem 2.5rem;
-  width: 100rem;
+  width: 70%;
   margin-bottom: 12rem;
   box-shadow: 0px 5px 10px 0px ${({theme}) => theme.greenAlpha300};
 
@@ -37,6 +38,7 @@ export const SearchInput = styled.div`
     background-color: ${({ theme }) => theme.gray300};
     flex: 1;
     font-size: 2rem;
+    width: 70%;
   }
 `;
 
